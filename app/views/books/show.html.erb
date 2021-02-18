@@ -8,10 +8,13 @@
   <% end %>
 </div>
 
-<h1>Books detail</h1>
-<p><%= @book.title %></p>
-<p><%= @book.body %></p>
+<h1>Book detail</h1>
+  <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+  <%= @user.name %>
+  <p><%= @book.title %></p>
+  <p><%= @book.body %></p>
 
 <% if @book.user == current_user %>
+  <%= link_to "Edit", edit_book_path(@book) %>
   <%= link_to "Destroy", book_path(@book), method: :delete, data:{confirm:"本当に消しますか?"} %>
 <% end %>
