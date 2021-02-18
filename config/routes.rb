@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'books#index'
+  root to: 'home#top'
   get "/home/about" => "home#about"
   devise_for :users
   resources :books
