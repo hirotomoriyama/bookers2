@@ -4,9 +4,18 @@
   <h3>name <%= @user.name %></h3><br>
   <h3>introduction <%=@user.introduction %></h3><br>
   <% if @user.id == current_user.id %>
-    <p><%= link_to "仮マイページ編集", edit_user_path(@user), class: 'btn btn-default' %></p>
+    <p><%= button_to '仮', edit_user_path(@user), method: :get %></p>
   <% end %>
 </div>
+
+<h1>New book</h1>
+<%= form_with model: @book, local:true do |f| %>
+  <h4>Title</h4>
+  <%= f.text_field :title %>
+  <h4>Opinion</h4>
+  <%= f.text_area :body %>
+  <%= f.submit 'Create Book' %>
+<% end %>
 
 <h1>Books</h1>
 <% @books.each do |book| %>
