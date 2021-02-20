@@ -1,4 +1,13 @@
 class UsersController < ApplicationController
+  before_action :check_user, only: [:edit, :update]
+
+  def check_user
+    user=User.find(params[:id])
+    unless user == current_user
+      redirect_to user_path(current_user.id)
+    end
+  end
+
   def index
     @users=User.all
     @book=Book.new

@@ -1,4 +1,12 @@
 class BooksController < ApplicationController
+  before_action :check_user, only: [:edit, :update]
+
+  def check_user
+    book=Book.find(params[:id])
+    unless book.user == current_user
+      redirect_to books_path
+    end
+  end
 
   def create
     @book=Book.new(book_params)
@@ -22,7 +30,7 @@ class BooksController < ApplicationController
   def show
     @book=Book.find(params[:id])
     @newbook=Book.new
-    @user=current_user
+    @user=User.find(@book.user_id)
   end
 
   def edit
@@ -31,9 +39,12 @@ class BooksController < ApplicationController
 
   def update
     @book=Book.find(params[:id])
-    @book.update(book_params)
-    flash[:success] = "You have updated book successfully"
-    redirect_to book_path(@book.id)
+    if @book.update(book_params)
+       flash[:success] = "You have updated book successfully"
+       redirect_to book_path(@book.id)
+    else
+      render :edit
+    end
   end
 
   def destroy

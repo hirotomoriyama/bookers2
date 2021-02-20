@@ -10,13 +10,11 @@
   <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %><br>
   <h3>name <%= @user.name %></h3><br>
   <h3>introduction <%=@user.introduction %></h3><br>
-  <% if @user.id == current_user.id %>
     <p>
-      <%= button_to edit_user_path(@user), method: :get do %>
+      <%= link_to edit_user_path(@user), method: :get do %>
         <i class="fas fa-user-cog"></i>
       <% end %>
     </p>
-  <% end %>
 </div>
 
 <h1>New book</h1>
@@ -29,14 +27,14 @@
 <% end %>
 
 <h1>Books</h1>
-<% @books.each do |book| %>
   <p>Title</p>
-  <br>
-  <%= link_to book_path(book.id) do %>
-    <%= book.title %>
-  <% end %>
-
   <p>Opinion</p>
-  <br>
-  <%= book.body %>
-<% end %>
+  <% @books.each do |book| %>
+    <%= link_to user_path(book.id) do %>
+      <p><%= attachment_image_tag book.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></p>
+    <% end %>
+    <%= link_to book_path(book.id) do %>
+      <p><%= book.title %></p>
+    <% end %>
+      <p><%= book.body %></p>
+  <% end %>
