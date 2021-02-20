@@ -4,7 +4,11 @@
   <h3>name <%= current_user.name %></h3><br>
   <h3>introduction <%=current_user.introduction %></h3><br>
   <% if current_user.id == current_user.id %>
-    <p><%= link_to "仮マイページ編集", edit_user_path(current_user), class: 'btn btn-default' %></p>
+    <p>
+      <%= button_to edit_user_path(current_user), method: :get do %>
+        <i class="fas fa-user-cog"></i>
+      <% end %>
+    </p>
   <% end %>
 </div>
 
@@ -23,4 +27,5 @@
 <% @users.each do |user| %>
   <%= attachment_image_tag user, :profile_image, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg" %>
   <%= user.name %>
+  <%= link_to "Show", user_path(user), method: :get %>
 <% end %>

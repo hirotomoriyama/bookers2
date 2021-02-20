@@ -4,7 +4,11 @@
   <h3>name <%= @user.name %></h3><br>
   <h3>introduction <%=@user.introduction %></h3><br>
   <% if @user.id == current_user.id %>
-    <p><%= button_to '仮', edit_user_path(@user), method: :get %></p>
+    <p>
+      <%= button_to edit_user_path(@user), method: :get do %>
+        <i class="fas fa-user-cog"></i>
+      <% end %>
+    </p>
   <% end %>
 </div>
 
