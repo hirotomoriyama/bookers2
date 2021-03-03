@@ -11,9 +11,26 @@ class User < ApplicationRecord
   has_many :followed, class_name:"Relationship", foreign_key:"followed_id", dependent: :destroy
   has_many :following_user, through: :follower, source: :followed
   has_many :follower_user, through: :followed, source: :follower
+
+  # ユーザーをフォローする
+  def follow(user_id)
+    follower.create(followed_id:user_id)
+  end
+
+  # ユーザーのフォローを外す
+  def unfollow(user_id)
+    follower.find_by(followed_id:user_id).destroy
+  end
+
+  # フォロー確認を行う
+  def following?(user)
+    following_user.include?(user)
+  end
+
   attachment :profile_image
 
   validates :name, uniqueness: true,
                    length: { minimum: 2, maximum: 20 }
   validates :introduction, length: { maximum: 50 }
+
 end
