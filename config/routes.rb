@@ -9,8 +9,8 @@ Rails.application.routes.draw do
     resources :book_comments, only: [:create, :destroy]
   end
 
-  get 'follow/:id' => 'relationships#index', as:'followlists'
-  get 'unfollow/:id' => 'relationships#index', as:'unfollowlists'
+  get 'follow/:id' => 'relationships#follow_index', as:'follows'
+  get 'follower/:id' => 'relationships#follower_index', as:'followers'
   post 'follow/:id' => 'relationships#create', as:'follow'
   post 'unfollow/:id' => 'relationships#destroy', as:'unfollow'
 end
