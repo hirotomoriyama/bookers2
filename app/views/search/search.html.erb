@@ -1,2 +1,5 @@
-<h1>Search#search</h1>
-<p>Find me in app/views/search/search.html.erb</p>
+<%= form_tag(search_path, :method => 'get') do %>
+  <%= text_field_tag :search %>
+  <%= select_tag(:option, options_for_select([["user", "1"],["book", "2"]])) %>
+  <%= submit_tag '検索' %>
+<% end %>
