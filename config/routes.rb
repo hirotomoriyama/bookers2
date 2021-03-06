@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   get 'follower/:id' => 'relationships#follower_index', as:'followers'
   post 'follow/:id' => 'relationships#create', as:'follow'
   post 'unfollow/:id' => 'relationships#destroy', as:'unfollow'
+
+  get '/search' => 'search#search'
 end
