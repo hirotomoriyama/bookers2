@@ -12,4 +12,12 @@ class Book < ApplicationRecord
     favorites.where(user_id:user.id).exists?
   end
 
+  def Book.search(search, user_or_book)
+    if user_or_book == "2"
+      Book.where(['title LIKE ?', "%#{search}%"])
+    else
+      Book.all
+    end
+  end
+
 end
