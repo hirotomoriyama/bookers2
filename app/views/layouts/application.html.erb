@@ -69,6 +69,14 @@
       </nav>
     </header>
 
+    <% if user_signed_in? %>
+      <%= form_tag(search_path, :method => 'get') do %>
+        <%= text_field_tag :search %>
+        <%= select_tag(:option, options_for_select([["user", "1"],["book", "2"]])) %>
+        <%= submit_tag '検索' %>
+      <% end %>
+    <% end %>
+
     <% flash.each do |message_type, message| %>
       <%= content_tag :div, message, class: message_type %>
     <% end %>
