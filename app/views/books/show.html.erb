@@ -44,8 +44,8 @@
                 <%= link_to "Destroy", book_path(@book), method: :delete, class: "btn btn-danger", data:{confirm:"本当に消しますか?"} %>
               <% end %>
             </td>
-            <td class="favorite-btn">
-              <%= render 'post', book: @book %>
+            <td class="book_<%= @book.id %>">
+              <%= render 'book', book: @book %>
             </td>
             <td>
               <p>コメント数:<%= @book.book_comments.count %></p>
