@@ -1,1 +1,2 @@
-alert('destroyアクション');
+$("#comments_area").html("<%= j(render 'books/comments', book: @book) %>");
+$("textarea").val("");

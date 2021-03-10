@@ -45,7 +45,7 @@
               <% end %>
             </td>
             <td class="book_<%= @book.id %>">
-              <%= render 'book', book: @book %>
+              <%= render 'book', book:@book %>
             </td>
             <td>
               <p>コメント数:<%= @book.book_comments.count %></p>
@@ -53,11 +53,14 @@
           </tr>
         </tbody>
       </table>
-      <table>
-        <%= render 'comments', user:@user, book:@book %>
-      <table>
-        <%= render 'comments_form', book:@book, book_comment:@book_comment %>
+      <table id="comments_area">
+        <%= render 'comments', book:@book, user:@user %>
       </table>
+      <table>
+        <%= form_with model:[@book, @book_comment], remote:true do |f| %>
+  　　　  　　<%= f.text_area :comment, rows:'5', placeholder: "コメントをここに" %>
+          <%= f.submit "送信" %>
+        <% end %>
       </table>
     </div>
   </div>
